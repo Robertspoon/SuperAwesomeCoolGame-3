@@ -12,9 +12,12 @@ namespace SuperAwesomeCoolGame_3
         static int shield;
         static int score;
         static int lives;
+        static int weapon;
 
         static void Main(string[] args)
         {
+
+
             Console.WriteLine("<-------------------------------------->");
             Console.WriteLine("THE SUPER AWESOME COOL GAME THE THIRD!!!");
             Console.WriteLine("<-------------------------------------->");
@@ -24,6 +27,7 @@ namespace SuperAwesomeCoolGame_3
             score = 0;
             shield = 100;
             lives = 3;
+            weapon = 0;
 
             ShowHUD();
             Console.WriteLine();
@@ -71,10 +75,13 @@ namespace SuperAwesomeCoolGame_3
             Console.ReadKey(true);
             Console.WriteLine("You switch to your Partical Disintegrator so you can destroy the golem that stands before you");
             Console.ReadKey(true);
+            ChangeWeapon(1);
             ShowHUD();
             Console.WriteLine();
             Console.ReadKey(true);
             Console.WriteLine("You blast the golem with your P.D., destroying it instantly!");
+            Console.WriteLine("Your P.D. breaks after using it!");
+            ChangeWeapon(2);
             Console.WriteLine();
             Console.ReadKey(true);
             EnemyValue(300);
@@ -86,13 +93,40 @@ namespace SuperAwesomeCoolGame_3
             Console.WriteLine();
             Heal(20);
             ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+            Console.WriteLine("You encounter a Fire Elemental!");
+            Console.WriteLine("He strikes you, dealing 60 damage!!");
+            Console.WriteLine();
+            Console.ReadKey(true);
+            TakeDamage(60);
+            ShowHUD();
+            Console.ReadKey(true);
+            Console.WriteLine("You strike the Elemental with your sword, but it has little affect!!");
+            Console.WriteLine("The elemental strikes you again, dealing a lethal blow!!");
+            TakeDamage(60);
+            Console.ReadKey(true);
+            Console.WriteLine();
+            LoseLife(1);
+            ShowHUD();
+            YouDied();
+
+
 
             Console.ReadKey();
+        }
+
+        static void YouDied()
+        {
+            if (health == 0)
+                Console.WriteLine("YOU DIED");
         }
         static void ShowHUD()
         {
             string status;
             status = "FINE AND DANDY";
+            string weaponName;
+            weaponName = "";
 
 
 
@@ -101,7 +135,34 @@ namespace SuperAwesomeCoolGame_3
             Console.WriteLine("Shield: " + shield);
             Console.WriteLine("Health: " + health);
             Console.WriteLine("Lives: " + lives);
-            //Console.WriteLine("Current Weapon: " +);
+            if (weapon == 0)
+            {
+                weaponName = "Gun";
+            }
+            if (weapon ==1)
+            {
+                weaponName = "Partical Disintegrator";
+            }
+            if (weapon ==2)
+            {
+                weaponName = "Sword";
+            }
+            if (weapon ==3)
+            {
+                weaponName = "Sniper Rifle";
+            }
+            if (weapon ==4)
+            {
+                weaponName = "ShotGun";
+            }
+            if (weapon ==5)
+            {
+                weaponName = "Rocket Launcher";
+            }
+
+            Console.WriteLine("Current Weapon: " + weaponName);
+
+
             if ((health >= 50) && (health <= 75))
             {
                 status = "JUST A FLESH WOUND";
@@ -115,6 +176,11 @@ namespace SuperAwesomeCoolGame_3
             if ((health >= 0) && (health <= 25))
             {
                 status = "ON YOUR LAST LEG";
+            }
+
+            if (health == 0)
+            {
+                status = "DEAD";
             }
             Console.WriteLine("Health Status: " + status);
 
@@ -155,8 +221,14 @@ namespace SuperAwesomeCoolGame_3
             }
         }
 
-        static void ChangeWeapon(int weapon)
+        static void ChangeWeapon(int weaponChange)
         {
+            weapon = weapon + 1;
+            {
+                if (weapon >= 5)
+                weapon = 0;
+            }
+            
 
         }
 
